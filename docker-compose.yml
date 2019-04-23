@@ -1,0 +1,20 @@
+version: '3.0'
+networks:
+  prodnetwork:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1450
+services:
+  nginx:
+    image: nginx:stable
+    networks:
+      prodnetwork:
+        aliases:
+          - nginx
+    ports:
+      - 80:80
+    restart: always
+    volumes:
+      - "/Users/pli/work/docker-nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "/Users/pli/work/docker-nginx/test.conf:/etc/nginx/conf.d/default.conf:ro"
+
